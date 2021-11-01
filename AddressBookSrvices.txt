@@ -1,0 +1,266 @@
+---Welcome To The Employee_Payroll_Services System---
+=================================================================================================================================================
+-- UC1_Creating_Database_For_AddessBookService
+================================================================================================================================================= 
+
+MySQL  localhost:3306 ssl  SQL > create database AddressBookService;
+Query OK, 1 row affected (0.1325 sec)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| addressbookservice |
+| dbname             |
+| demo               |
+| employeedb         |
+| floarmilldemo      |       
+| information_schema |
+| mysql              |  
+| performance_schema |             
++--------------------+
+16 rows in set (0.0025 sec)
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > create table AddressBook (
+                                                   -> firstName varchar(50) not null,
+                                                   -> lastName varchar(50) not null,
+                                                   -> address varchar(100) not null,
+                                                   -> city varchar(50) not null,
+                                                   -> state varchar(50) not null,
+                                                   -> zip int not null,
+                                                   -> phoneNumber double not null,
+                                                   -> email varchar(100) not null );
+Query OK, 0 rows affected (1.6162 sec)
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > desc AddressBook;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| firstName   | varchar(50)  | NO   |     | NULL    |       |
+| lastName    | varchar(50)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
+| city        | varchar(50)  | NO   |     | NULL    |       |
+| state       | varchar(50)  | NO   |     | NULL    |       |
+| zip         | int          | NO   |     | NULL    |       |
+| phoneNumber | double       | NO   |     | NULL    |       |
+| email       | varchar(100) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+8 rows in set (0.1805 sec)
+=================================================================================================================================================
+-- UC2_Creating_Table_As_AddressBook_With_Attributes
+=================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > insert into AddressBook(firstname, lastname, address,city, state, zip,phoneNumber,email) values
+
+                                                   -> ('Mohin', 'Sayyad','Ambejogai','Beed','Delhi', 431519, 7498656662,'mssayyad@gmail.com'),
+                                                   -> ('Prashant','Phad','Parali','Beed','Hydrabad', 431517, 8954632120,'prashant@gmail.com'),
+                                                   -> ('Rushikesh','Wakde','VishrantWadi','Pune','Maharashtra', 410111, 8473652845,'rushikesh@gmail.com'),
+                                                   -> ('Jakir','Shaikh','Sirsala','Pangaon','Tamilnadu', 431522,7256413289,'jakir@gmail.com');
+Query OK, 4 rows affected (0.2745 sec)
+
+Records: 4  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook;
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| firstName | lastName | address      | city    | state       | zip    | phoneNumber | email               |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed    | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  |
+| Prashant  | Phad     | Parali       | Beed    | Hydrabad    | 431517 |  8954632120 | prashant@gmail.com  |
+| Rushikesh | Wakde    | VishrantWadi | Pune    | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com |
+| Jakir     | Shaikh   | Sirsala      | Pangaon | Tamilnadu   | 431522 |  7256413289 | jakir@gmail.com     |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+4 rows in set (0.0017 sec)
+
+==================================================================================================================================================
+--> UC4 editing the existing contact by their firstname
+==================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update AddressBook set  lastName='Sayyad' where firstname='Jakir';
+Query OK, 1 rows affected (0.0265 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update addressbook set phoneNumber=9503324461 where firstname='Prashant';
+Query OK, 1 row affected (0.1638 sec)
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook;
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| firstName | lastName | address      | city    | state       | zip    | phoneNumber | email               |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed    | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  |
+| Prashant  | Phad     | Parali       | Beed    | Hydrabad    | 431517 |  9503324461 | prashant@gmail.com  |
+| Rushikesh | Wakde    | VishrantWadi | Pune    | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com |
+| Jakir     | Sayyad   | Sirsala      | Pangaon | Tamilnadu   | 431522 |  7256413289 | jakir@gmail.com     |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+4 rows in set (0.0017 sec)
+
+==================================================================================================================================================
+-- UC5 -deleting the contact by their lastname
+==================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > delete from addressBook where lastname='Phad';
+Query OK, 1 row affected (0.1014 sec)
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook;
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| firstName | lastName | address      | city    | state       | zip    | phoneNumber | email               |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed    | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  |
+| Rushikesh | Wakde    | VishrantWadi | Pune    | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com |
+| Jakir     | Sayyad   | Sirsala      | Pangaon | Tamilnadu   | 431522 |  7256413289 | jakir@gmail.com     |
++-----------+----------+--------------+---------+-------------+--------+-------------+---------------------+
+3 rows in set (0.0191 sec)
+===========================================================
+--> UC6 retrieving the contact by city or state
+===========================================================
+
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook where city = 'Pune' or State='Maharashtra';
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+
+| firstName | lastName | address      | city | state       | zip    | phoneNumber | email               |
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+
+| Rushikesh | Wakde    | VishrantWadi | Pune | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com |
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+
+1 row in set (0.0166 sec)
+===================================================================================================================================================
+-- UC7 size of addressbook by city and state
+===================================================================================================================================================
+=
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select count(firstname) from AddressBook where city = 'Pune';
++------------------+
+| count(firstname) |
++------------------+
+|                1 |
++------------------+
+1 row in set (0.0283 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select count(firstName) from AddressBook where state = 'Bihar';
++------------------+
+| count(firstName) |
++------------------+
+|                0 |
++------------------+
+1 row in set (0.0021 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select count(firstname) from AddressBook where city='Pangaon';
++------------------+
+| count(firstname) |
++------------------+
+|                1 |
++------------------+
+1 row in set (0.0032 sec)
+
+====================================================================================================================================================
+-- UC8 soriting the name alphbetically for given city
+====================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > insert into AddressBook(firstname,lastname,address,city,state,zip,phoneNumber,email)
+                                                   -> values ('Mahendra','Dhoni','Bham','Chikkamagalur','KarnataK',196542,9933556644,'ms@gmail.com');
+
+Query OK, 1 row affected (0.1008 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > insert into AddressBook(firstname,lastname,address,city,state,zip,phoneNumber,email)
+                                                   -> values('Ravi','Jadeja','Killa','Suri','Punjab',431511,7896451125,'jadeja@gmail.com');
+Query OK, 1 row affected (0.0725 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL >  select * from AddressBook;
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+
+| firstName | lastName | address      | city          | state       | zip    | phoneNumber | email               |
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed          | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  |
+| Rushikesh | Wakde    | VishrantWadi | Pune          | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com |
+| Jakir     | Sayyad   | Sirsala      | Pangaon       | Tamilnadu   | 431522 |  7256413289 | jakir@gmail.com     |
+| Mahendra  | Dhoni    | Bham         | Chikkamagalur | KarnataK    | 196542 |  9933556644 | ms@gmail.com        |
+| Ravi      | Jadeja   | Killa        | Suri          | Punjab      | 431511 |  7896451125 | jadeja@gmail.com    |
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+
+5 rows in set (0.0017 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select firstname,city from AddressBook order by city;
++-----------+---------------+
+| firstname | city          |
++-----------+---------------+
+| Mohin     | Beed          |
+| Mahendra  | Chikkamagalur |
+| Jakir     | Pangaon       |
+| Rushikesh | Pune          |
+| Ravi      | Suri          |
++-----------+---------------+
+5 rows in set (0.0251 sec)
+
+====================================================================================================================================================
+-- UC9- Altering the table with addressbook name and contact type
+====================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > alter table addressbook add bookName varchar(25) not null, add contactType varchar(25)  not null;
+Query OK, 0 rows affected (1.4859 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > desc addressBook;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| firstName   | varchar(50)  | NO   |     | NULL    |       |
+| lastName    | varchar(50)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
+| city        | varchar(50)  | NO   |     | NULL    |       |
+| state       | varchar(50)  | NO   |     | NULL    |       |
+| zip         | int          | NO   |     | NULL    |       |
+| phoneNumber | double       | NO   |     | NULL    |       |
+| email       | varchar(100) | NO   |     | NULL    |       |
+| bookName    | varchar(25)  | NO   |     | NULL    |       |
+| contactType | varchar(25)  | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+10 rows in set (0.0076 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update AddressBook set bookname='one', contactType='Family' where lastname='Sayyad' ;
+Query OK, 2 rows affected (0.0947 sec)
+
+Rows matched: 2  Changed: 2  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update addressBook set bookname='two' ,contactType='Friends' where firstname='Jakir';
+Query OK, 1 row affected (0.0886 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update addressBook set bookName='one', contactType='family' where fristname='Rushikesh';
+ERROR: 1054 (42S22): Unknown column 'fristname' in 'where clause'
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update addressBook set bookName='one', contactType='family' where firstname='Rushikesh';
+Query OK, 1 row affected (0.0555 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > update addressbook set bookname='two',contactType='Profession' where  lastname='Dhoni';
+Query OK, 1 row affected (0.1275 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook;
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+----------+-------------+
+| firstName | lastName | address      | city          | state       | zip    | phoneNumber | email               | bookName | contactType |
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+----------+-------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed          | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  | one      | Family      |
+| Rushikesh | Wakde    | VishrantWadi | Pune          | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com | one      | family      |
+| Jakir     | Sayyad   | Sirsala      | Pangaon       | Tamilnadu   | 431522 |  7256413289 | jakir@gmail.com     | two      | Friends     |
+| Mahendra  | Dhoni    | Bham         | Chikkamagalur | KarnataK    | 196542 |  9933556644 | ms@gmail.com        | two      | Profession  |
+| Ravi      | Jadeja   | Killa        | Suri          | Punjab      | 431511 |  7896451125 | jadeja@gmail.com    |          |             |
++-----------+----------+--------------+---------------+-------------+--------+-------------+---------------------+----------+-------------+
+5 rows in set (0.0167 sec)
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from addressbook where contactType='Family';
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+----------+-------------+
+| firstName | lastName | address      | city | state       | zip    | phoneNumber | email               | bookName | contactType |
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+----------+-------------+
+| Mohin     | Sayyad   | Ambejogai    | Beed | Delhi       | 431519 |  7498656662 | mssayyad@gmail.com  | one      | Family      |
+| Rushikesh | Wakde    | VishrantWadi | Pune | Maharashtra | 410111 |  8473652845 | rushikesh@gmail.com | one      | family      |
++-----------+----------+--------------+------+-------------+--------+-------------+---------------------+----------+-------------+
+2 rows in set (0.0014 sec)
+
+MySQL  localhost:3306 ssl  addressbookservice  SQL > select * from AddressBook where contacttype='Friends';
++-----------+----------+---------+---------+-----------+--------+-------------+-----------------+----------+-------------+
+| firstName | lastName | address | city    | state     | zip    | phoneNumber | email           | bookName | contactType |
++-----------+----------+---------+---------+-----------+--------+-------------+-----------------+----------+-------------+
+| Jakir     | Sayyad   | Sirsala | Pangaon | Tamilnadu | 431522 |  7256413289 | jakir@gmail.com | two      | Friends     |
++-----------+----------+---------+---------+-----------+--------+-------------+-----------------+----------+-------------+
+1 row in set (0.0015 sec)
+=====================================================================================================================================================
+-- UC10 ability to get count of contacts by contacttype
+=====================================================================================================================================================
+
+ MySQL  localhost:3306 ssl  addressbookservice  SQL > select count(firstname) from AddressBook where contactType='family';
++------------------+
+| count(firstname) |
++------------------+
+|                2 |
++------------------+
+1 row in set (0.0240 sec)
+
+
